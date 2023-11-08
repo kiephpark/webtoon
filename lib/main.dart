@@ -16,8 +16,23 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   List<int> counters = [];
+  bool isShowTitle = true;
+
+  @override
+  void initState() {
+    super.initState();
+    print("initState!!");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("dispose");
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("build!!");
     return MaterialApp(
       theme: ThemeData(
         textTheme: const TextTheme(
@@ -26,18 +41,25 @@ class _AppState extends State<App> {
           )
         ),
       ),
-      home: const Scaffold(
-        backgroundColor: Color(0xFFF4EDDB),
+      home: Scaffold(
+        backgroundColor: const Color(0xFFF4EDDB),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              LargeTitle(),
+              isShowTitle ? const LargeTitle() : const Text("No Display"),
+              IconButton(onPressed: onPressed, icon: const Icon(Icons.toggle_off_outlined))
             ],
           ),
         ),
       ),
     );
+  }
+
+  void onPressed() {
+    setState(() {
+      isShowTitle = !isShowTitle;
+    });
   }
 }
 
