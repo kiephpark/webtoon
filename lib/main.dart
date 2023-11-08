@@ -19,33 +19,41 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color(0xFFF4EDDB),
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
+          )
+        ),
+      ),
+      home: const Scaffold(
+        backgroundColor: Color(0xFFF4EDDB),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Click Counter",
-                style: TextStyle(fontSize: 30),
-              ),
-              for(var x in counters) Text('$x', style: const TextStyle(fontSize: 40),),
-              IconButton(
-                iconSize: 40,
-                onPressed: onPressed, 
-                icon: const Icon(Icons.add_rounded),
-                ),
+              LargeTitle(),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  void onPressed() {
-    // setState(() {
-    //   counters.add(counters.length);
-    // });
-    counters.add(counters.length);
-    print(counters);
+class LargeTitle extends StatelessWidget {
+  const LargeTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "Click Counter",
+      style: TextStyle(
+        color: Theme.of(context).textTheme.displayLarge?.color,
+        fontSize: 30,
+      ),
+    );
   }
 }
